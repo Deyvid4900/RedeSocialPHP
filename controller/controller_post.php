@@ -11,7 +11,5 @@
 if (empty($post) ) {
     echo 'n envio';
     exit;
-}
-echo $_USUARIO;
-require_once '../Model/insereComentario.php'
+}require_once '../Model/insereComentario.php'
 ?>

@@ -11,7 +11,8 @@
 
 <body>
     <?php
-        require_once "../ProjetoRedeSocialPHP/Model/config.php";
+        require_once "../../ProjetoRedeSocialPHP/RedeSocialPHP/Model/config.php";
+        
         $PDO = conecta_bd();
     ?>
     <div class="box-Login">
@@ -20,7 +21,7 @@
                 Login
             </h1>
         </div>
-        <form class="py-5" action="../ProjetoRedeSocialPHP/controller/controller_login.php" method="post">
+        <form class="py-5" action="../../ProjetoRedeSocialPHP/RedeSocialPHP/controller/controller_login.php" method="post">
             <div class="w-100 px-5 m-auto ">
                 <div class="mb-3 Inputs">
                     <label for="exampleInputEmail1" class="form-label">

@@ -27,6 +27,7 @@
             <div class="btnSide btn">Mensagens</div>
             <div class="btnSide btn">Perfil</div>
 
+            <div class="btnSide btn" id="btn_Sair">Sair</div>
             <!-- Button trigger modal -->
             <button type="button" class="btn btn-primary w-50 mx-auto" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">Postar</button>
         </div>
@@ -38,6 +39,30 @@
                     </h1>
                 </div>
             </div>
+            <?php
+
+
+
+            $stmt_count = $PDO->prepare("SELECT COUNT(*) as total FROM comentarios");
+            $stmt_count->execute();
+            $stmt = $PDO->prepare("SELECT nomeUsuario,comentario From comentarios ORDER BY codComentario DESC");
+            $stmt->execute();
+            $total = $stmt_count->fetchColumn();
+            if ($total > 0) : ?>
+                <div>
+                    <?php while ($resultado = $stmt->fetch(PDO::FETCH_ASSOC)) : {
+                            echo '<ul>';
+                            echo '<li><h4>'.$resultado['nomeUsuario'].'</h4>'.$resultado['comentario']."<br></li>";
+                            echo '</ul>';
+                        }
+                    ?>
+                    <?php endwhile; ?>
+                </div>
+            <?php else : ?>
+
+            <?php endif; ?>
+
+
         </div>
         <div class="box-3 d-flex flex-column ">
             <div class="mx-auto d-flex  flex-wrap">
@@ -76,15 +101,22 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Nova Postagem</h1>
+                    <div class="d-flex align-items-center ">
+                        <div class="fotoPerfil divPerfil rounded-circle ">
+                        </div>
+                        <div>
+                            <?php echo  $_SESSION['username'] ?>
+                        </div>
+                    </div>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <form action="../../controller//controller_post.php" method="post">
                     <div class="modal-body">
 
                         <div class="mb-3">
-                             <?php echo  $username?>
-                            <label for="message-text" class="col-form-label">Post</label>
+
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">Nova Postagem</h1>
+                            <br>
                             <textarea class="form-control" name="nPost" id="message-text"></textarea>
                         </div>
 
@@ -99,12 +131,21 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js">
-        const myModal = document.getElementById('myModal')
-        const myInput = document.getElementById('myInput')
-
+        const myModal = document.getElementById('myModal');
+        const myInput = document.getElementById('myInput');
         myModal.addEventListener('shown.bs.modal', () => {
             myInput.focus()
         })
+    </script>
+    <script>
+        const btn_Sair = document.getElementById('btn_Sair');
+
+        
+
+        btn_Sair.addEventListener('click', function() {
+            console.log('ok');
+            window.location.href = '../../index.php'; 
+        });
     </script>
 </body>
 

@@ -9,7 +9,7 @@ $stmt -> bindParam(':nEmail',$nEmail);
 $stmt -> bindParam(':nSenha',$senhaHash);
 
 if ($stmt -> execute()) {
-    header('Location: ../Login.php');
+    header('Location: ../index.php');
 }
 else{
     echo "Ocorreu um erro na inclusão do registro";

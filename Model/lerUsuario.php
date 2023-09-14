@@ -7,8 +7,10 @@ if ($stmt->num_rows === 1) {
     // Verifique se a senha fornecida corresponde à senha no banco de dados
     if (password_verify($password, $dbPassword)) {
         // Autenticação bem-sucedida
+        session_destroy();
         session_start();
-        $username = $_SESSION['username'];
+        $_SESSION['username'] = $username ;
+        $_SESSION['isLogged'] = true;
         header('Location: ../view/Home/home.php ');
         // Redirecione para a página de sucesso ou área restrita
     } else {
